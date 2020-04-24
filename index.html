@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- development version, includes helpful console warnings -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    </head>
+    <body>
+        <h1>Form submitting posts & displaying it with Flask/Jinja:</h1>
+        <form action='/' method='POST'>
+            <input placeholder="Name" name='name'>
+            <input placeholder="Post Content" name='post'>
+            <input type='submit' value='submit'>
+        </form>
+        {% for post in posts %}
+        <div>{{ post[1] + ": " + post[2] }}</div>
+        {% endfor %}
+        
+        <!-- Vue js -->
+        <h1>Some Vue.js</h1>
+        <h2>The basic tutorial stuff</h2>
+        <p>
+            First Vue app displaying a message defined in app.message.
+        </p>
+        {% raw %}
+        <div id="app">
+            {{message}}
+        </div>
+        <div id="app-2">
+            <span v-bind:title="message">
+              Hover your mouse over me for a few seconds
+              to see my dynamically bound title!
+            </span>
+        </div>
+
+        <p>
+            Enable/Disable sentence by manipulating app3.seen=true/false
+        </p>
+        <div id="app-3">
+            <span v-if="seen">Now you see me</span>
+          </div>
+
+        <p>
+            Fill this todo list. It's statless, so will be lost on reload!
+        </p>
+        <div id="app-4">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+        </div>
+        <div id="app-5">
+            <input v-model="ToDo">
+            <button v-on:click="addToDo">Submit</button>
+        </div>
+        <h2>Using Flask as API:</h2>
+        <div id="app-6">
+            <div v-for="post_vue in posts_vue">
+                {{ post_vue.name}}: {{ post_vue.content}}
+            </div>
+            <input v-model="name" placeholder="enter name">
+            <input v-model="post" placeholder="enter post">
+            <button v-on:click="postEntry">Submit to API</button>
+            <p>Preview:  {{ name }}: {{ post }}</p>
+        </div>
+        {% endraw %}
+
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+    </body>
+</html>
