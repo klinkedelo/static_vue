@@ -60,7 +60,7 @@ var app6 = new Vue({
     methods: {
         postEntry: function () {
             axios
-            .post('http://127.0.0.1:5000/api2', {
+            .post('https://young-earth-30945.herokuapp.com/api2', {
                 name: this.name,
                 post: this.post
             })
@@ -71,7 +71,7 @@ var app6 = new Vue({
         },
         getEntries: function () {
             axios
-            .get('http://127.0.0.1:5000/api')
+            .get('https://young-earth-30945.herokuapp.com/api')
             .then(response => (this.posts_vue = response.data))
             .catch(error => console.log(error))
         },        
